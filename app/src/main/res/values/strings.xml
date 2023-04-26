@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Brifieng</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_helper_text">Введите логин</string>
+    <string name="password_helper_text">Введите пароль</string>
+    <string name="login_hint">Логин</string>
+    <string name="password_hint">Пароль</string>
+    <string name="register_save">Регистрация</string>
+    <string name="login_save">Вход</string>
+    <string name="email_helper_text">Введите email</string>
+    <string name="name_helper_text">Введите имя</string>
+    <string name="surname_helper_text">Введите Фамилию</string>
+    <string name="group_helper_text">Введите группу</string>
+    <string name="email_hint">Почта</string>
+    <string name="name_hint">Имя</string>
+    <string name="surname_hint">Фамилия</string>
+    <string name="group_hint">Группа</string>
+</resources>
