@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.Brifieng" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryVariant">@color/blue</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -15,8 +15,8 @@
     </style>
 
     <style name="bottom_save" parent="Widget.MaterialComponents.Button.TextButton">
-        <item name="android:textColor">@color/white</item>
-        <item name="android:backgroundTint">@color/blue_transparent</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:backgroundTint">@color/accent_yellow</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:elevation">0dp</item>
     </style>
@@ -24,7 +24,15 @@
     <style name="DialogTheme" parent="Theme.MaterialComponents.DialogWhenLarge">
         <item name="windowNoTitle">true</item>
         <item name="android:windowAnimationStyle">@style/Animation.AppCompat.Dialog</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
     </style>
 
+    <style name="FabButtonStyle" parent="Widget.MaterialComponents.FloatingActionButton">
+        <!-- Цвет фона кнопки FAB -->
+        <item name="backgroundTint">@color/blue_transparent</item>
+        <!-- Цвет иконки на кнопке FAB -->
+        <item name="android:tint">@color/black</item>
+    </style>
 
 </resources>

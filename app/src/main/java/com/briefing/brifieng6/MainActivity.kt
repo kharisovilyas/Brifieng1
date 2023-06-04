@@ -1,38 +1,50 @@
 package com.briefing.brifieng6
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import com.briefing.brifieng6.ui.login.screens.LoginFragment
+import com.briefing.brifieng6.ui.student.screens.HomeStudFragment
+import com.briefing.brifieng6.ui.teacher.screens.HomeTeachFragment
 import com.briefing.test.R
 import com.briefing.test.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
     private var binding: ActivityMainBinding? = null
-    private var fragmentManager = supportFragmentManager
-    private var fragmentTransaction = fragmentManager.beginTransaction()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        val FIRST_ENTER = "isFirstEnter"
-        val enter = getSharedPreferences(FIRST_ENTER, MODE_PRIVATE)
-        var isFirstEnter = false
-        var teacher = false
-        if (enter.contains(FIRST_ENTER)) {
-            isFirstEnter = enter.getBoolean(FIRST_ENTER, false)
-        }
-        if (!isFirstEnter) {
-            teacher = initUser()
+        val sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE)
+        val isTeacher: Boolean
+        if (!sharedPreferences.getBoolean("IS_FIRST_RUN", true)) {
+            // Приложение уже запускалось ранее
+            isTeacher = sharedPreferences.getBoolean("IS_TEACHER", false)
+            startApp(isTeacher)
         } else {
-            startApp(teacher)
+            initUser()
         }
+
         setContentView(binding!!.root)
     }
 
-    private fun startApp(teacher: Boolean) {}
-    private fun initUser(): Boolean {
+    private fun startApp(teacher: Boolean) {
+        val fragment: Fragment =
+            if(teacher) HomeTeachFragment()
+            else HomeStudFragment()
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.container, fragment)
+            .commit()
+    }
+
+    private fun initUser(){
         val loginFragment = LoginFragment()
-        fragmentTransaction.add(R.id.container, loginFragment).commit()
-        //возможны проблемы
-        return false
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.container, loginFragment)
+            .commit()
     }
 }

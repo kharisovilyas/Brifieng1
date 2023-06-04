@@ -1,7 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.6.10"
+    id 'org.jetbrains.kotlin.plugin.serialization' version "1.6.10"
+    id 'com.google.dagger.hilt.android' version '2.41' apply true
+    id 'kotlin-kapt'
 }
 
 android {
@@ -31,6 +33,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
@@ -43,6 +46,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.firebase:firebase-crashlytics-buildtools:2.9.5'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
@@ -63,4 +68,16 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:1.1.1"
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+    //ktor client
+    def ktor_version = "1.6.3"
+    implementation "io.ktor:ktor-client-core:$ktor_version"
+    implementation "io.ktor:ktor-client-cio:$ktor_version"
+    implementation "io.ktor:ktor-client-json:$ktor_version"
+    implementation "io.ktor:ktor-client-serialization:$ktor_version"
+
+    //Dagger Hilt
+    implementation 'com.google.dagger:hilt-android:2.46'
+    kapt 'com.google.dagger:hilt-android-compiler:2.40.5'
+
+
 }

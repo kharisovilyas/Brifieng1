@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/to_answ_container"
+    >
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:background="@drawable/border_text_view"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="Заголовок"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.05" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|end"
+        android:padding="16dp"
+        android:text="Срок: "
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|end"
+        android:padding="16dp"
+        android:text="Осталось времени: "
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/date"
+        tools:layout_editor_absoluteX="0dp" />
+
+
+    <TextView
+        android:id="@+id/question_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:background="@drawable/border_text_view"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="Вопрос преподавателя ?"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@+id/time"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:background="@drawable/border_text_view"
+        android:layout_margin="32dp"
+        android:id="@+id/answer_input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        app:counterEnabled="true"
+        android:maxLines="10"
+        app:counterMaxLength="100"
+        android:imeOptions="actionDone"
+        app:layout_constraintTop_toBottomOf="@+id/question_text_view">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/answer_input_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/login_text_rounded"
+            android:maxLines="10"
+            android:maxLength="100"
+            android:imeOptions="actionNone" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/sendAnswer"
+        android:text="@string/send_answer"
+        android:theme="@style/bottom_save"
+        android:textColor="@color/black"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_margin="24dp"
+        android:elevation="4dp"
+        android:textSize="14sp"
+        app:cornerRadius="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/answer_input_layout"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <ImageView
+        android:id="@+id/correct"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/correct"
+        >
+
+    </ImageView>
+
+    <ImageView
+        android:id="@+id/incorrect"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/incorrect"
+        >
+
+    </ImageView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

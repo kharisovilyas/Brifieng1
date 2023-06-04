@@ -1,4 +1,4 @@
-package com.briefing.brifieng6.server.`object`
+package com.briefing.brifieng6.api.model
 
 import kotlinx.serialization.Serializable
 @Serializable
@@ -8,6 +8,8 @@ data class RegisterReceiveRemote(
     val email: String,
     val name_: String,
     val surname: String,
+    val group_ : String,
+    val university: String,
     val teacher: Boolean
 )
 @Serializable

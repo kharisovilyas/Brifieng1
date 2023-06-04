@@ -21,4 +21,18 @@
         <item name="android:elevation">0dp</item>
     </style>
 
+    <style name="FabButtonStyle" parent="Widget.MaterialComponents.FloatingActionButton">
+        <!-- Цвет фона кнопки FAB -->
+        <item name="backgroundTint">@color/blue_transparent</item>
+        <!-- Цвет иконки на кнопке FAB -->
+        <item name="android:tint">@color/black</item>
+    </style>
+
+    <style name="DialogTheme" parent="Theme.MaterialComponents.DialogWhenLarge">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@style/Animation.AppCompat.Dialog</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
 </resources>

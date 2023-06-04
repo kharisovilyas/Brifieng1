@@ -8,4 +8,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blue_transparent">#55008cff</color>
+
+    <color name="gray">#DDD6CF</color>
+    <color name="light_blue">#8FB4D4</color>
+    <color name="blue">#0B3C5D</color>
+    <color name="pale_gray">#F5E5D5</color>
+    <color name="corporal">#C5D1EB</color>
+    <color name="watermelon">#FF847C</color>
+    <color name="teal">#84DCC6</color>
+    <color name="accent_yellow">#FFC107</color>
 </resources>
