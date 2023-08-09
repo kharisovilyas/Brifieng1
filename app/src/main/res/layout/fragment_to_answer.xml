@@ -23,29 +23,36 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.05" />
 
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center|end"
-        android:padding="16dp"
-        android:text="Срок: "
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        tools:layout_editor_absoluteX="0dp" />
 
     <TextView
+        android:layout_marginTop="50dp"
         android:id="@+id/time"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="60dp"
+        android:background="@drawable/border_text_view"
         android:gravity="center|end"
         android:padding="16dp"
-        android:text="Осталось времени: "
+        android:text="12:00"
         android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/date"
-        tools:layout_editor_absoluteX="0dp" />
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <TextView
+        android:layout_marginTop="50dp"
+        android:id="@+id/text_for_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_text_view"
+        android:gravity="center|end"
+        android:padding="16dp"
+        android:text="Осталось времени:"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/time"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
 
     <TextView
@@ -58,7 +65,7 @@
         android:padding="8dp"
         android:text="Вопрос преподавателя ?"
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@+id/time"
         tools:layout_editor_absoluteX="0dp" />
 
@@ -102,24 +109,5 @@
         app:layout_constraintTop_toBottomOf="@+id/answer_input_layout"
         app:layout_constraintVertical_bias="0.1" />
 
-    <ImageView
-        android:id="@+id/correct"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/correct"
-        >
-
-    </ImageView>
-
-    <ImageView
-        android:id="@+id/incorrect"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/incorrect"
-        >
-
-    </ImageView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -46,7 +46,7 @@
                 android:hint="@string/title_input_hint"
                 android:padding="8dp"
                 app:counterEnabled="true"
-                app:counterMaxLength="50"
+                app:counterMaxLength="25"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:startIconDrawable="@drawable/create">
@@ -57,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/login_text_rounded"
                     android:inputType="textAutoCorrect"
-                    android:maxLength="50"
+                    android:maxLength="25"
                     android:maxLines="2" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -82,7 +82,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/login_text_rounded"
-                    android:inputType="textAutoCorrect"
+                    android:inputType="textMultiLine"
                     android:maxLength="100"
                     android:maxLines="10" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -115,7 +115,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-            <com.google.android.material.textfield.TextInputLayout
+            <LinearLayout
                 android:id="@+id/time_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -123,50 +123,105 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 android:background="@drawable/edit_text_rounded_bg"
-                android:hint="@string/time_input_hint"
-                android:padding="8dp"
-                app:counterEnabled="true"
-                app:counterMaxLength="5"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:startIconDrawable="@drawable/time">
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="8dp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/time_input_edit_text"
+                <TextView
+                    android:id="@+id/timeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:text="Выберите время выполнения задачи"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/login_text_rounded"
-                    android:inputType="time"
-                    android:maxLength="5"
-                    android:maxLines="10" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/minutesEditText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/login_text_rounded"
+                        android:digits="0123456789"
+                        android:gravity="center"
+                        android:inputType="time"
+                        android:maxLength="2"
+                        android:maxLines="1"
+                        android:padding="20dp"
+                        android:text="00" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:gravity="center"
+                        android:text=":"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/secondsEditText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/login_text_rounded"
+                        android:digits="0123456789"
+                        android:gravity="center"
+                        android:inputType="time"
+                        android:maxLength="2"
+                        android:maxLines="1"
+                        android:padding="20dp"
+                        android:text="00" />
+
+                </LinearLayout>
+            </LinearLayout>
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/date_input_layout"
+            <LinearLayout
+                android:id="@+id/date_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 android:background="@drawable/edit_text_rounded_bg"
-                android:hint="@string/date_input_hint"
-                android:padding="8dp"
-                app:counterEnabled="true"
-                app:counterMaxLength="30"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:startIconDrawable="@drawable/date">
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="8dp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/date_input_edit_text"
+                <TextView
+                    android:id="@+id/daysTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:text="Выберите срок выполнения задачи"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/login_text_rounded"
-                    android:inputType="datetime"
-                    android:maxLength="30"
-                    android:maxLines="10" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <DatePicker
+                        android:id="@+id/input_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/login_text_rounded"
+                        android:gravity="center"
+                        android:padding="8dp">
+                    </DatePicker>
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/send_task"

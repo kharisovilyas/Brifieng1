@@ -1,4 +1,4 @@
-package com.briefing.brifieng6.ui.student.recycler
+package com.briefing.brifieng6.ui.teacher.recycler
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -6,14 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.briefing.brifieng6.ui.student.recycler.model.ItemGroupData
-import com.briefing.test.databinding.TasksLayoutBinding
+import com.briefing.test.databinding.ItemGroupBinding
 
 class GroupRecyclerAdapter(private val onGroupListener: OnGroupListener, internal var data: List<ItemGroupData>) :
     RecyclerView.Adapter<GroupRecyclerAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            TasksLayoutBinding.inflate( LayoutInflater.from(parent.context), parent, false),
+            ItemGroupBinding.inflate(LayoutInflater.from(parent.context), parent, false),
             onGroupListener
         )
     }
@@ -43,29 +43,26 @@ class GroupRecyclerAdapter(private val onGroupListener: OnGroupListener, interna
         notifyDataSetChanged()
     }
 
-    class ViewHolder(private val binding: TasksLayoutBinding, onGroupListener: OnGroupListener)
+    class ViewHolder(private val binding: ItemGroupBinding, onGroupListener: OnGroupListener)
         : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
         private var data: ItemGroupData? = null
-        private val onGroupListenerListener: OnGroupListener = onGroupListener
+        private val _onGroupListener: OnGroupListener = onGroupListener
         @SuppressLint("SetTextI18n")
         fun bind(data: ItemGroupData) {
             this.data = data
-            binding.dateTextView.text = "Человек в группе: " + data.numberOfStudent
-            binding.titleTextView.text = "Группа: " + data.group_
-        }
-
-        private fun getCorrectTime(time_: Int): String {
-            val minutes = time_ / 60
-            val seconds = time_ % 60
-            return String.format("%02d:%02d", minutes, seconds)
+            binding.quantityTextView.text = "Человек в группе: " + data.numberOfStudent
+            binding.groupTextView.text = "Группа: " + data.group_
+            binding.univTextView.text = "Университет: " + data.university
         }
 
         init {
             itemView.setOnClickListener(this)
         }
+
         override fun onClick(v: View) {
-            onGroupListenerListener.onGroupClick(data)
+            _onGroupListener.onGroupClick(data)
         }
+
     }
 }
 

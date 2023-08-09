@@ -12,6 +12,7 @@ class LoginViewModel : ViewModel() {
     private val _token = MutableLiveData<String>()
     private val _teacher = MutableLiveData<Boolean>()
     private val _errorMessage = MutableLiveData<String>()
+    private val _message = MutableLiveData<String>()
     val isSuccessfulLogin: LiveData<Boolean>
         get() = _isSuccessfulRegister
     val token: LiveData<String>
@@ -20,21 +21,25 @@ class LoginViewModel : ViewModel() {
         get() = _teacher
     val errorMessage: LiveData<String>
         get() = _errorMessage
+    val message: LiveData<String>
+        get() = _message
 
     private val loginController = LoginController()
 
     fun enterUser(loginData: LoginReceiveRemote) {
         loginController.enter(loginData, object : LoginCallback {
-            override fun onLoginSuccess(teacher: Boolean, token: String) {
+            override fun onLoginSuccess(teacher: Boolean, token: String, myMessage: String?) {
                 _token.postValue(token)
                 _teacher.postValue(teacher)
                 _isSuccessfulRegister.postValue(true)
+                _message.postValue(myMessage.toString())
             }
+
             override fun onLoginFailure(errorMessage: String?) {
-                if(errorMessage == null){
+                if (errorMessage == null) {
                     _errorMessage.postValue("Что то пошло не так!")
-                }else{
-                    _errorMessage.postValue(errorMessage!!)
+                } else {
+                    _errorMessage.postValue(errorMessage.toString())
                 }
                 _isSuccessfulRegister.postValue(false)
             }

@@ -1,7 +1,6 @@
 package com.briefing.brifieng6.api.domain
 
 import android.annotation.SuppressLint
-import com.briefing.brifieng6.ui.student.recycler.GroupRecyclerAdapter
 import com.briefing.brifieng6.ui.student.recycler.RecyclerViewAdapter
 import com.briefing.brifieng6.ui.student.recycler.model.ItemTaskData
 import io.ktor.client.*
@@ -12,8 +11,7 @@ import kotlinx.coroutines.*
 
 class ItemTaskController(private val group: String) {
 
-
-    private val BASE_URL = "http://192.168.0.200:8082/"
+    private val BASE_URL = "http://192.168.1.145:8082/"
 
     @SuppressLint("NotifyDataSetChanged")
     @OptIn(DelicateCoroutinesApi::class)

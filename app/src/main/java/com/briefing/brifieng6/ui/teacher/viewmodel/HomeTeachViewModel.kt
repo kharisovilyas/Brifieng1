@@ -5,9 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.briefing.brifieng6.api.domain.ItemGroupController
-import com.briefing.brifieng6.ui.student.recycler.GroupRecyclerAdapter
+import com.briefing.brifieng6.ui.teacher.recycler.GroupRecyclerAdapter
 import com.briefing.brifieng6.ui.student.recycler.model.ItemGroupData
-import com.briefing.brifieng6.ui.student.viewmodel.HomeStudViewModel
 
 class HomeTeachViewModel(private val university: String) : ViewModel() {
     private val _data = MutableLiveData<ItemGroupData>()

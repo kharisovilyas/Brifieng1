@@ -17,6 +17,9 @@ class ToTaskViewModel: ViewModel() {
     private val _message = MutableLiveData<String>()
     val message: LiveData<String>
         get() = _message
+    private val _errorMessage = MutableLiveData<String>()
+    val errorMessage: LiveData<String>
+        get() = _errorMessage
 
     fun sendTask(taskReceiveRemote: TaskReceiveRemote) {
         taskController.sendTask(taskReceiveRemote, object : TaskCallback {
@@ -29,7 +32,7 @@ class ToTaskViewModel: ViewModel() {
             }
 
             override fun onSendTaskFailure(message: String) {
-                _message.postValue(message)
+                _errorMessage.postValue(message)
             }
 
             override fun onSendTaskSuccess(message: String) {

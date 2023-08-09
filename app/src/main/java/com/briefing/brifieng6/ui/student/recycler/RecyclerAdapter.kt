@@ -6,19 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.briefing.brifieng6.ui.student.recycler.model.ItemTaskData
-import com.briefing.test.databinding.TasksLayoutBinding
+import com.briefing.test.databinding.ItemTaskBinding
 
 class RecyclerViewAdapter(private val onLessonListener: OnTaskListener, internal var data: List<ItemTaskData>) :
     RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            TasksLayoutBinding.inflate( LayoutInflater.from(parent.context), parent, false),
+            ItemTaskBinding.inflate( LayoutInflater.from(parent.context), parent, false),
             onLessonListener
         )
     }
-
-
 
     //insert fields of the ViewHolder class into the recycler
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -45,10 +43,10 @@ class RecyclerViewAdapter(private val onLessonListener: OnTaskListener, internal
         notifyDataSetChanged()
     }
 
-    class ViewHolder(private val binding: TasksLayoutBinding, onLessonListener: OnTaskListener)
+    class ViewHolder(private val binding: ItemTaskBinding, onTaskListener: OnTaskListener)
         : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
         private var data: ItemTaskData? = null
-        private val onTaskListener: OnTaskListener = onLessonListener
+        private val _onTaskListener: OnTaskListener = onTaskListener
         @SuppressLint("SetTextI18n")
         fun bind(data: ItemTaskData) {
             this.data = data
@@ -59,6 +57,7 @@ class RecyclerViewAdapter(private val onLessonListener: OnTaskListener, internal
         }
 
         private fun getCorrectTime(time_: Int): String {
+            println(time_)
             val minutes = time_ / 60
             val seconds = time_ % 60
             return String.format("%02d:%02d", minutes, seconds)
@@ -68,7 +67,7 @@ class RecyclerViewAdapter(private val onLessonListener: OnTaskListener, internal
             itemView.setOnClickListener(this)
         }
         override fun onClick(v: View) {
-            onTaskListener.onTaskClick(data)
+            _onTaskListener.onTaskClick(data)
         }
     }
 }

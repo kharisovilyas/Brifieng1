@@ -1,7 +1,5 @@
-package com.briefing.brifieng6.ui.student.screens
+package com.briefing.brifieng6.ui.teacher.screens.statistic
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,15 +14,17 @@ import com.briefing.brifieng6.ui.student.recycler.model.ItemTaskData
 import com.briefing.brifieng6.ui.student.viewmodel.HomeStudViewModel
 import com.briefing.brifieng6.ui.student.viewmodel.HomeStudViewModelFactory
 import com.briefing.test.R
-import com.briefing.test.databinding.HomeStudFragmentBinding
+import com.briefing.test.databinding.TasksStatisticBinding
 
-class HomeStudFragment : Fragment(), OnTaskListener {
-    private var binding: HomeStudFragmentBinding? = null
+class ItemTaskStatistic(
+    private val group: String
+) : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: RecyclerViewAdapter
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
+    private var binding: TasksStatisticBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -34,7 +34,7 @@ class HomeStudFragment : Fragment(), OnTaskListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = HomeStudFragmentBinding.inflate(inflater, container, false)
+        binding = TasksStatisticBinding.inflate(inflater, container, false)
         recyclerView = binding!!.recyclerView
         swipeRefreshLayout = binding!!.swipeRefresh
         adapter = RecyclerViewAdapter(
@@ -42,7 +42,7 @@ class HomeStudFragment : Fragment(), OnTaskListener {
                 override fun onTaskClick(data: ItemTaskData?) {
                     requireActivity().supportFragmentManager
                         .beginTransaction()
-                        .replace(R.id.container, ToAnswerFragment(data))
+                        .replace(R.id.container, ItemStudentStatistic(group, data))
                         .addToBackStack(null)
                         .commit()
                 }
@@ -53,14 +53,7 @@ class HomeStudFragment : Fragment(), OnTaskListener {
         return binding!!.root
     }
 
-
-    @SuppressLint("NotifyDataSetChanged")
     private fun getTasks(adapter: RecyclerViewAdapter) {
-
-        //TODO:
-        // сделать так, чтобы либо через SP указывалось либо через БДшку
-
-        val group = "424"
         val viewModelFactory = HomeStudViewModelFactory(group)
         val viewModel = ViewModelProvider(this, viewModelFactory)[HomeStudViewModel::class.java]
         viewModel.fetchTasks(adapter)
@@ -70,11 +63,6 @@ class HomeStudFragment : Fragment(), OnTaskListener {
         }
     }
 
-    private fun getGroupFromSharedPreference(): String{
-        val sharedPreferences = requireContext().getSharedPreferences("userdata", Context.MODE_PRIVATE)
-        return sharedPreferences.getString("group", "") ?: ""
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
@@ -82,14 +70,5 @@ class HomeStudFragment : Fragment(), OnTaskListener {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
-    }
-
-
-    override fun onTaskClick(data: ItemTaskData?) {
-        requireActivity().supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.container, ToAnswerFragment(data))
-            .addToBackStack(null)
-            .commit()
     }
 }

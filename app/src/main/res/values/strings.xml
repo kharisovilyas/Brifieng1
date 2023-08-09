@@ -30,8 +30,12 @@
     <string name="send_answer">Отправить ответ</string>
     <string name="send_answer_repeat">Отправить ответ еще раз</string>
     <string name="check_box">Поставьте галочку если вы преподаватель</string>
-    <string name="url">http://172.20.224.1:8082/</string>
+    <string name="home_url">http://172.20.224.1:8082/</string>
+    <string name="test_url">http://172.20.224.1:8082/</string>
     <string name="menu_home">Обучение</string>
     <string name="menu_history">История</string>
     <string name="menu_prof">Мой профиль</string>
+    <string name="menu_statistic">Успеваемость</string>
+    <string name="menu_teach_home">Выдача задач</string>
+    <string name="menu_teach_prof">Профиль</string>
 </resources>

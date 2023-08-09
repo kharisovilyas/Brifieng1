@@ -1,7 +1,6 @@
 package com.briefing.brifieng6.ui.login.screens
 
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,12 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.briefing.brifieng6.api.model.RegisterReceiveRemote
+import com.briefing.brifieng6.ui.login.useralert.InformDialog
 import com.briefing.brifieng6.ui.login.viewmodel.RegisterViewModel
 import com.briefing.brifieng6.ui.student.screens.HomeStudFragment
 import com.briefing.brifieng6.ui.teacher.screens.HomeTeachFragment
 import com.briefing.test.R
 import com.briefing.test.databinding.FragmentRegisterBinding
-import com.google.android.material.snackbar.Snackbar
 import java.util.*
 
 class RegisterFragment : Fragment() {
@@ -45,11 +44,14 @@ class RegisterFragment : Fragment() {
             sendRegisterData()
         }
         binding!!.exit.setOnClickListener {
-            requireActivity().supportFragmentManager.popBackStack()
+            requireActivity().supportFragmentManager.popBackStackImmediate()
         }
-        binding!!.generateLogin.setOnClickListener{
+        binding!!.generateLogin.setOnClickListener {
             rowLogin = generateLogin()
             binding!!.loginText.text = rowLogin
+        }
+        if(binding!!.checkbox.isChecked){
+            binding!!.groupInputEditText.isEnabled = false
         }
     }
 
@@ -65,6 +67,16 @@ class RegisterFragment : Fragment() {
         var hasEmptyFields = false
 
         // Проверяем все TextInputLayout на наличие пустых полей
+        if (university.isEmpty() || university != "СПбГТИ(ТУ)") {
+            binding!!.univInputEditText.error = "Заполните поле"
+            informUser(
+                "Функционал в разработке!",
+                "Пока доступен только один ВУЗ - СПбГТИ(ТУ).",
+                R.drawable.to_work
+            )
+            hasEmptyFields = true
+        }
+
         if (login.isEmpty()) {
             hasEmptyFields = true
         }
@@ -101,46 +113,66 @@ class RegisterFragment : Fragment() {
 
         // Если есть пустые поля, выполните необходимые действия
         if (hasEmptyFields) {
-            informUser("Пустые поля!")
+            informUser(
+                "Пустые поля!",
+                "Заполните необходимые поля",
+                R.drawable.incorrect
+            )
         } else {
             Log.d("УСПЕШНО", "соединение устанавливается")
             val registerViewModel = RegisterViewModel()
+            val userData = RegisterReceiveRemote(
+                login = login,
+                password_ = password,
+                email = email,
+                name_ = name,
+                surname = surname,
+                group_ = group,
+                university = university,
+                teacher = isTeacher
+            )
             registerViewModel.insertUser(
-                RegisterReceiveRemote(
-                    login = login,
-                    password_ = password,
-                    email = email,
-                    name_ = name,
-                    surname = surname,
-                    group_ = group,
-                    university = university,
-                    teacher = isTeacher
-                )
+                userData
             )
             saveRoleUserInSharedPreference(isTeacher)
-            registerViewModel.message.observe(viewLifecycleOwner){
-                informUser(it)
+            registerViewModel.errorMessage.observe(viewLifecycleOwner) {
+                informUser("Ошибка!", it, R.drawable.incorrect)
             }
-            registerViewModel.isSuccessfulRegister.observe(viewLifecycleOwner) {
-                    isSuccessful ->
+            registerViewModel.message.observe(viewLifecycleOwner) {
+                informUser("Спасибо, что с нами!", it, R.drawable.correct)
+            }
+            registerViewModel.isSuccessfulRegister.observe(viewLifecycleOwner) { isSuccessful ->
                 if (isSuccessful) {
                     initUser(isTeacher)
+                    saveDataInSharedPreference(userData)
                 }
             }
         }
     }
 
-    private fun informUser(message: String?) {
-        val snack = Snackbar
-            .make(binding!!.registerContainer, "Ошибка !", Snackbar.LENGTH_SHORT)
-            .setAction(message) { }
-        snack.setActionTextColor(Color.RED)
-        snack.show()
+    private fun saveDataInSharedPreference(userData: RegisterReceiveRemote) {
+        val sharedPreferences =
+            requireContext().getSharedPreferences("userdata", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("login", userData.login)
+        editor.putString("email", userData.email)
+        editor.putString("name", userData.name_)
+        editor.putString("surname", userData.surname)
+        if (!userData.teacher) editor.putString("group", userData.group_)
+        editor.putString("university", userData.university)
+        editor.apply()
     }
+
+    private fun informUser(title: String, message: String, image: Int) {
+        val dialogFragment = InformDialog(title, message, image)
+        dialogFragment.show(parentFragmentManager, "inform about register")
+    }
+
 
     private fun generateLogin(): String {
         val loginLength = 8 // Длина логина
-        val allowedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" // Разрешенные символы
+        val allowedChars =
+            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" // Разрешенные символы
         val random = Random()
 
         val loginBuilder = StringBuilder(loginLength)

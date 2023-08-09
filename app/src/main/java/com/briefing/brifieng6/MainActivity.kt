@@ -6,9 +6,12 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.briefing.brifieng6.ui.login.screens.LoginFragment
 import com.briefing.brifieng6.ui.student.screens.HomeStudFragment
+import com.briefing.brifieng6.ui.student.screens.MainStudFragment
 import com.briefing.brifieng6.ui.teacher.screens.HomeTeachFragment
+import com.briefing.brifieng6.ui.teacher.screens.MainTeachFragment
 import com.briefing.test.R
 import com.briefing.test.databinding.ActivityMainBinding
+import com.briefing.test.databinding.MainStudFragmentBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,8 +35,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun startApp(teacher: Boolean) {
         val fragment: Fragment =
-            if(teacher) HomeTeachFragment()
-            else HomeStudFragment()
+            if(teacher) MainTeachFragment()
+            else MainStudFragment()
         supportFragmentManager
             .beginTransaction()
             .add(R.id.container, fragment)

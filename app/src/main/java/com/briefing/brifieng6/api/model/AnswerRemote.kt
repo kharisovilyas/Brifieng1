@@ -15,3 +15,12 @@ data class AnswerResponseRemote(
     val result: Boolean,
     val details: String
 )
+
+@Serializable
+data class AnswerDTO(
+    val login: String,
+    val title: String,
+    val answer: String,
+    val solved: Boolean,
+    val result_: Boolean
+)

@@ -1,0 +1,81 @@
+<!-- fragment_profile.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/textViewLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:layout_margin="32dp"
+        android:background="@drawable/border_text_view"
+        />
+
+    <TextView
+        android:id="@+id/textViewEmail"
+        android:layout_width="match_parent"
+
+        android:padding="8dp"
+        android:layout_margin="32dp"
+        android:background="@drawable/border_text_view"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textViewName"
+        android:layout_width="match_parent"
+
+        android:padding="8dp"
+        android:layout_margin="32dp"
+        android:background="@drawable/border_text_view"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textViewSurname"
+        android:layout_width="match_parent"
+
+        android:padding="8dp"
+        android:layout_margin="32dp"
+        android:background="@drawable/border_text_view"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textViewGroup"
+        android:layout_width="match_parent"
+
+        android:padding="8dp"
+        android:layout_margin="32dp"
+        android:background="@drawable/border_text_view"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textViewUniversity"
+        android:layout_width="match_parent"
+        android:padding="8dp"
+        android:layout_margin="32dp"
+        android:background="@drawable/border_text_view"
+        android:layout_height="wrap_content" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/exitProfile"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_margin="24dp"
+        android:elevation="4dp"
+        android:gravity="center"
+        android:text="Выход из профиля"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:theme="@style/bottom_save"
+        app:cornerRadius="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/answer_input_layout"
+        app:layout_constraintVertical_bias="0.1" />
+
+</LinearLayout>

@@ -1,6 +1,5 @@
-package com.briefing.brifieng6.ui.teacher.screens
+package com.briefing.brifieng6.ui.teacher.screens.statistic
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,16 +8,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.briefing.brifieng6.ui.student.recycler.model.ItemGroupData
 import com.briefing.brifieng6.ui.teacher.recycler.GroupRecyclerAdapter
 import com.briefing.brifieng6.ui.teacher.recycler.OnGroupListener
-import com.briefing.brifieng6.ui.student.recycler.model.ItemGroupData
 import com.briefing.brifieng6.ui.teacher.viewmodel.HomeTeachViewModel
 import com.briefing.brifieng6.ui.teacher.viewmodel.HomeTeachViewModelFactory
 import com.briefing.test.R
-import com.briefing.test.databinding.HomeTeachFragmentBinding
+import com.briefing.test.databinding.StatisticFragmentBinding
 
-class HomeTeachFragment : Fragment() {
-    private var binding: HomeTeachFragmentBinding? = null
+class StatisticFragment: Fragment() {
+    private var binding: StatisticFragmentBinding? = null
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: GroupRecyclerAdapter
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
@@ -31,7 +30,7 @@ class HomeTeachFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = HomeTeachFragmentBinding.inflate(inflater, container, false)
+        binding = StatisticFragmentBinding.inflate(inflater, container, false)
         recyclerView = binding!!.recyclerView
         swipeRefreshLayout = binding!!.swipeRefresh
         adapter = GroupRecyclerAdapter(
@@ -39,7 +38,7 @@ class HomeTeachFragment : Fragment() {
                 override fun onGroupClick(data: ItemGroupData?) {
                     requireActivity().supportFragmentManager
                         .beginTransaction()
-                        .replace(R.id.container, ToTaskFragment(data))
+                        .replace(R.id.main_teach_container, ItemTaskStatistic(data!!.group_))
                         .addToBackStack(null)
                         .commit()
                 }
@@ -50,10 +49,7 @@ class HomeTeachFragment : Fragment() {
         return binding!!.root
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun getGroups(adapter: GroupRecyclerAdapter) {
-        //TODO:
-        // сделать так, чтобы либо через SP указывалось либо через БДшку
         val university = "СПбГТИ(ТУ)"
         val viewModelFactory = HomeTeachViewModelFactory(university)
         val viewModel = ViewModelProvider(this, viewModelFactory)[HomeTeachViewModel::class.java]

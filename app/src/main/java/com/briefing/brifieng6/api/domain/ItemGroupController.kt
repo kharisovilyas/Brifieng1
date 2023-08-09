@@ -1,19 +1,16 @@
 package com.briefing.brifieng6.api.domain
 
 import android.annotation.SuppressLint
-import com.briefing.brifieng6.ui.student.recycler.GroupRecyclerAdapter
-import com.briefing.brifieng6.ui.student.recycler.RecyclerViewAdapter
+import com.briefing.brifieng6.ui.teacher.recycler.GroupRecyclerAdapter
 import com.briefing.brifieng6.ui.student.recycler.model.ItemGroupData
-import com.briefing.brifieng6.ui.student.recycler.model.ItemTaskData
 import io.ktor.client.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.request.*
 import kotlinx.coroutines.*
-import kotlinx.serialization.json.Json
 
 class ItemGroupController(private val university: String) {
-    private val BASE_URL = "http://192.168.0.200:8082/"
+    private val BASE_URL = "http://192.168.1.145:8082/"
 
     @SuppressLint("NotifyDataSetChanged")
     @OptIn(DelicateCoroutinesApi::class)

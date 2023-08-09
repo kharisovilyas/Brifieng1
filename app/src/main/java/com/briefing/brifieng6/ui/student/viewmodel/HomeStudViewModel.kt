@@ -17,6 +17,7 @@ class HomeStudViewModel(private val university: String) : ViewModel(){
     fun fetchTasks(adapter: RecyclerViewAdapter) {
         itemTaskController.fetchTasks(adapter)
     }
+
 }
 
 class HomeStudViewModelFactory(private val group: String) : ViewModelProvider.Factory {

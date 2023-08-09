@@ -9,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.briefing.brifieng6.api.model.LoginReceiveRemote
+import com.briefing.brifieng6.ui.login.useralert.InformDialog
 import com.briefing.brifieng6.ui.login.viewmodel.LoginViewModel
+import com.briefing.brifieng6.ui.login.viewmodel.RegisterViewModel
 import com.briefing.brifieng6.ui.student.screens.HomeStudFragment
 import com.briefing.brifieng6.ui.teacher.screens.HomeTeachFragment
 import com.briefing.test.R
@@ -56,7 +58,11 @@ class LoginFragment : Fragment() {
         }
         // Если есть пустые поля, выполните необходимые действия
         if (hasEmptyFields) {
-            informUser("Пустые поля!")
+            informUser(
+                "Пустые поля!",
+                "Заполните необходимые поля",
+                R.drawable.incorrect
+            )
         } else {
             val loginViewModel = LoginViewModel()
             loginViewModel.enterUser(
@@ -67,7 +73,10 @@ class LoginFragment : Fragment() {
             )
             var isTeacher = false
             loginViewModel.errorMessage.observe(viewLifecycleOwner) {
-                informUser(it)
+                informUser("Ошибка!", it, R.drawable.incorrect)
+            }
+            loginViewModel.message.observe(viewLifecycleOwner){
+                informUser("С возвращением!", it, R.drawable.correct)
             }
             loginViewModel.token.observe(viewLifecycleOwner) {
                 saveTokenInSharedPreference(it)
@@ -79,17 +88,32 @@ class LoginFragment : Fragment() {
             loginViewModel.isSuccessfulLogin.observe(viewLifecycleOwner) { isSuccessful ->
                 if (isSuccessful) {
                     initUser(isTeacher)
+                    saveUserdataInSharedPreference(login)
                 }
             }
         }
     }
 
-    private fun informUser(errorMessage: String?) {
-        val snack = Snackbar
-            .make(binding!!.loginContainer, "Ошибка !", Snackbar.LENGTH_SHORT)
-            .setAction(errorMessage) { }
-        snack.setActionTextColor(Color.RED)
-        snack.show()
+    private fun saveUserdataInSharedPreference(login: String) {
+        val registerViewModel = RegisterViewModel()
+        registerViewModel.fetchUserData(login)
+        registerViewModel.userdata.observe(viewLifecycleOwner){
+            val sharedPreferences =
+                requireContext().getSharedPreferences("userdata", Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.putString("login", it.login)
+            editor.putString("email", it.email)
+            editor.putString("name", it.name_)
+            editor.putString("surname", it.surname)
+            if (!it.teacher) editor.putString("group", it.group_)
+            editor.putString("university", it.university)
+            editor.apply()
+        }
+    }
+
+    private fun informUser(title: String, message: String, image: Int) {
+        val dialogFragment = InformDialog(title, message, image)
+        dialogFragment.show(parentFragmentManager, "inform about login")
     }
 
     private fun saveTokenInSharedPreference(token: String?) {

@@ -13,7 +13,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.IOException
 
 class LoginController {
-    private val BASE_URL = "http://192.168.0.200:8082/"
+    private val BASE_URL = "http://192.168.1.145:8082/"
     private val client = OkHttpClient()
 
     fun enter(loginReceiveRemote: LoginReceiveRemote, callback: LoginCallback) {
@@ -38,7 +38,7 @@ class LoginController {
                     val responseObj = Json.decodeFromString<LoginResponseRemote>(responseString.toString())
                     val teacher = responseObj.teacher
                     val token = responseObj.token_
-                    callback.onLoginSuccess(teacher, token)
+                    callback.onLoginSuccess(teacher, token, "Приятно видеть вас снова!")
                 } else {
                     val responseString = response.body?.string()
                     callback.onLoginFailure(responseString)

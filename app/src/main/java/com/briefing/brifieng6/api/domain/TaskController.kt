@@ -19,7 +19,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.IOException
 
 class TaskController {
-    private val BASE_URL = "http://192.168.0.200:8082/"
+    private val BASE_URL = "http://192.168.1.145:8082/"
     private val client = OkHttpClient()
 
     fun sendTask(taskReceiveRemote: TaskReceiveRemote, callback: TaskCallback) {
@@ -40,7 +40,7 @@ class TaskController {
             override fun onResponse(call: Call, response: Response) {
                 if (response.isSuccessful) {
                     Log.d("УСПЕШНО", "соденинение установленно")
-                    callback.onSendTaskSuccess("Успешная регистрация!\nДобро пожаловать ")
+                    callback.onSendTaskSuccess("Задача успешно отправлена!\n")
                 } else {
                     Log.d("ПРОВАЛЬНО", "соденинение не установленно")
                     val responseString = response.body?.string()

@@ -6,15 +6,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.ui.graphics.Color
 import androidx.fragment.app.DialogFragment
 import com.briefing.test.R
 import com.briefing.test.databinding.GreetingsDialogBinding
 
-class DialogGreetings(correctAnswer: Boolean, details: String) : DialogFragment() {
+
+class InformDialog(
+    private val title: String,
+    private val details: String,
+    private val image: Int
+) : DialogFragment() {
     private var binding: GreetingsDialogBinding? = null
-    private val result = correctAnswer
-    private val _details = details
     override fun onStart() {
         super.onStart()
         val dialog = dialog
@@ -40,10 +42,7 @@ class DialogGreetings(correctAnswer: Boolean, details: String) : DialogFragment(
         binding!!.btnClose.setOnClickListener {
             dismiss()
         }
-        binding!!.correct.setOnClickListener{
-            dismiss()
-        }
-        binding!!.incorrect.setOnClickListener{
+        binding!!.image.setOnClickListener{
             dismiss()
         }
         return binding!!.root
@@ -51,18 +50,9 @@ class DialogGreetings(correctAnswer: Boolean, details: String) : DialogFragment(
 
     @SuppressLint("ResourceAsColor")
     private fun setViewData() {
-        Log.d("ЗДЕСЬ!", _details)
-        binding!!.description.text = _details
-        if(result){
-            binding!!.correct.visibility = View.VISIBLE
-            binding!!.titleOfDialog.text = "Верно!"
-            binding!!.titleOfDialog.setTextColor(R.color.teal)
-        }
-        else {
-            binding!!.incorrect.visibility = View.VISIBLE
-            binding!!.titleOfDialog.text = "Неверно!"
-            binding!!.titleOfDialog.setTextColor(R.color.watermelon)
-        }
+        binding!!.titleOfDialog.text = title
+        binding!!.description.text = details
+        binding!!.image.setImageResource(image)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

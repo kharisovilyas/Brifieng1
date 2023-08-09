@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation">
+    <fragment
+        android:id="@+id/nome_fragment"
+        android:name="com.briefing.brifieng6.ui.teacher.screens.HomeTeachFragment"
+        android:label="Fragment 1"
+        tools:layout="@layout/home_teach_fragment" />
+
+    <fragment
+        android:id="@+id/statistix_fragment"
+        android:name="com.briefing.brifieng6.ui.teacher.screens.statistic.StatisticFragment"
+        android:label="Fragment 1"
+        tools:layout="@layout/statistic_fragment" />
+
+
+    <fragment
+        android:id="@+id/prof_fragment"
+        android:name="com.briefing.brifieng6.ui.teacher.screens.ProfFragment"
+        android:label="Fragment 1"
+        tools:layout="@layout/profile_fragment" />
+</navigation>
